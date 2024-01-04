@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kinopoisk/providers/movie_provider.dart';
-import 'package:kinopoisk/providers/search_provider.dart';
+import 'package:kinopoisk/providers/movies_notifier.dart';
+import 'package:kinopoisk/providers/search_notifier.dart';
 import 'package:kinopoisk/widgets/movie_card.dart';
 import 'package:kinopoisk/widgets/movie_new.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

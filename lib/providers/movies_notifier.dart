@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:kinopoisk/main.dart';
 import 'package:kinopoisk/models/movie.dart';
-import 'package:kinopoisk/providers/search_provider.dart';
+import 'package:kinopoisk/providers/search_notifier.dart';
 
 final _movies = objectbox.getMovies();
 

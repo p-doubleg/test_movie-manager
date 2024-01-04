@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kinopoisk/providers/movie_provider.dart';
-import 'package:kinopoisk/screens/movie_details.dart';
+import 'package:kinopoisk/providers/movies_notifier.dart';
+import 'package:kinopoisk/screens/movie_details_screen.dart';
 
 class MovieCard extends ConsumerWidget {
   const MovieCard({

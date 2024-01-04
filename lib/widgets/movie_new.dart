@@ -1,7 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kinopoisk/providers/movie_provider.dart';
+import 'package:kinopoisk/providers/movies_notifier.dart';
 
 class NewMovie extends ConsumerStatefulWidget {
   const NewMovie({super.key});
