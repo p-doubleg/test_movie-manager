@@ -51,7 +51,7 @@ class _NewMovieState extends ConsumerState<NewMovie> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Ошбика'),
+        title: const Text('Ошибка'),
         content: const Text('Убедитесь что все поля заполнены.'),
         actions: [
           TextButton(
@@ -64,7 +64,7 @@ class _NewMovieState extends ConsumerState<NewMovie> {
     );
   }
 
-  void _submitExpenseData() {
+  void _submitMovieData() {
     if (_titleController.text.trim().isEmpty ||
         _selectedCountry == null ||
         _selectedDate == null) {
@@ -128,7 +128,7 @@ class _NewMovieState extends ConsumerState<NewMovie> {
             ],
           ),
           TextButton(
-            onPressed: _submitExpenseData,
+            onPressed: _submitMovieData,
             child: const Text('Сохранить'),
           ),
         ],

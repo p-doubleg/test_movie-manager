@@ -3,22 +3,30 @@ import 'package:kinopoisk/main.dart';
 import 'package:kinopoisk/models/movie.dart';
 import 'package:kinopoisk/providers/search_provider.dart';
 
-final movies = objectbox.getMovies();
+final _movies = objectbox.getMovies();
 
 class MoviesNotifier extends StateNotifier<List<Movie>> {
-  MoviesNotifier() : super(movies);
+  MoviesNotifier() : super(_movies);
 
-  // Movie getMovie(int id) {
-  //   return state.where((movie) => movie.id == id).toList()[0];
-  // }
+  void addMovie({
+    required String title,
+    required String country,
+    required DateTime year,
+  }) {
+    objectbox.addMovie(Movie(
+      title: title,
+      date: year,
+      country: country,
+    ));
 
-  void addMovie(
-      {required String title,
-      required String country,
-      required DateTime year}) {
-    objectbox.addMovie(Movie(title: title, date: year, country: country));
-
-    state = [...state, Movie(title: title, date: year, country: country)];
+    state = [
+      ...state,
+      Movie(
+        title: title,
+        date: year,
+        country: country,
+      )
+    ];
   }
 
   void deleteMovie(Movie movie) {
@@ -28,15 +36,21 @@ class MoviesNotifier extends StateNotifier<List<Movie>> {
   }
 
   void editMovie(
-      Movie movie, String newTitle, DateTime newYear, String newCountry) {
-    objectbox.editMovie(movie.id, newTitle, newYear, newCountry);
+    Movie movie,
+    String newTitle,
+    DateTime newYear,
+    String newCountry,
+  ) {
+    objectbox.editMovie(
+      movie.id,
+      newTitle,
+      newYear,
+      newCountry,
+    );
 
     state = state.map((m) {
       if (m == movie) {
-        movie.title = newTitle;
-        movie.country = newCountry;
-        movie.date = newYear;
-        return movie;
+        return m.copyWith(newTitle, newYear, newCountry);
       }
       return m;
     }).toList();

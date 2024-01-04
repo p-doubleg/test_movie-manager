@@ -13,19 +13,12 @@ class MoviesScreen extends ConsumerStatefulWidget {
 }
 
 class _MoviesScreenState extends ConsumerState<MoviesScreen> {
-  String? _searchInput;
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   void _openAddMovieOverlay() {
     showModalBottomSheet(
       useSafeArea: true,
       isScrollControlled: true,
       context: context,
-      builder: (ctx) => const NewMovie(),
+      builder: (_) => const NewMovie(),
     );
   }
 
@@ -57,23 +50,10 @@ class _MoviesScreenState extends ConsumerState<MoviesScreen> {
           Expanded(
             child: ListView.builder(
               itemCount: movies.length,
-              itemBuilder: (ctx, index) {
-                if (_searchInput != null) {
-                  if (movies[index]
-                      .title
-                      .toLowerCase()
-                      .contains(_searchInput!.toLowerCase())) {
-                    return MovieCard(
-                      movieId: movies[index].id,
-                    );
-                  } else {
-                    return null;
-                  }
-                } else {
-                  return MovieCard(
-                    movieId: movies[index].id,
-                  );
-                }
+              itemBuilder: (_, index) {
+                return MovieCard(
+                  movieId: movies[index].id,
+                );
               },
             ),
           ),

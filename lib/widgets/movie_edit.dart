@@ -5,7 +5,10 @@ import 'package:kinopoisk/models/movie.dart';
 import 'package:kinopoisk/providers/movie_provider.dart';
 
 class EditMovie extends ConsumerStatefulWidget {
-  const EditMovie({super.key, required this.movieId});
+  const EditMovie({
+    super.key,
+    required this.movieId,
+  });
 
   final int movieId;
 
@@ -14,21 +17,21 @@ class EditMovie extends ConsumerStatefulWidget {
 }
 
 class _EditMovieState extends ConsumerState<EditMovie> {
-  DateTime? _selectedDate;
-  String? _selectedCountry;
+  late DateTime _selectedDate;
+  late String _selectedCountry;
   final _titleController = TextEditingController();
 
   @override
   void initState() {
+    super.initState();
+
     final movie = ref
         .read(moviesProvider)
-        .where((movie) => movie.id == widget.movieId)
-        .toList()[0];
+        .firstWhere((movie) => movie.id == widget.movieId);
 
     _selectedDate = movie.date;
     _titleController.text = movie.title;
     _selectedCountry = movie.country;
-    super.initState();
   }
 
   @override
@@ -42,7 +45,6 @@ class _EditMovieState extends ConsumerState<EditMovie> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Select Year"),
           content: SizedBox(
             width: 300,
             height: 300,
@@ -50,7 +52,7 @@ class _EditMovieState extends ConsumerState<EditMovie> {
               firstDate: DateTime(DateTime.now().year - 100),
               lastDate: DateTime.now(),
               initialDate: DateTime.now(),
-              selectedDate: _selectedDate!,
+              selectedDate: _selectedDate,
               onChanged: (DateTime dateTime) {
                 setState(() {
                   _selectedDate = dateTime;
@@ -92,9 +94,7 @@ class _EditMovieState extends ConsumerState<EditMovie> {
             children: [
               TextButton.icon(
                 label: Text(
-                  _selectedDate != null
-                      ? _selectedDate!.year.toString()
-                      : movie.date.year.toString(),
+                  _selectedDate.year.toString(),
                 ),
                 onPressed: () {
                   _presentDatePicker(movie);
@@ -103,7 +103,7 @@ class _EditMovieState extends ConsumerState<EditMovie> {
               ),
               TextButton.icon(
                 label: Text(
-                  _selectedCountry ?? movie.country,
+                  _selectedCountry,
                   overflow: TextOverflow.ellipsis,
                 ),
                 onPressed: () {
@@ -121,8 +121,12 @@ class _EditMovieState extends ConsumerState<EditMovie> {
           ),
           TextButton(
             onPressed: () {
-              ref.read(moviesProvider.notifier).editMovie(movie,
-                  _titleController.text, _selectedDate!, _selectedCountry!);
+              ref.read(moviesProvider.notifier).editMovie(
+                    movie,
+                    _titleController.text,
+                    _selectedDate,
+                    _selectedCountry,
+                  );
               Navigator.pop(context);
             },
             child: const Text('Отредактировать'),

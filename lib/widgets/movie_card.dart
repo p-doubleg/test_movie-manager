@@ -13,10 +13,8 @@ class MovieCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final movie = ref
-        .watch(moviesProvider)
-        .where((movie) => movie.id == movieId)
-        .toList()[0];
+    final movie =
+        ref.watch(moviesProvider).firstWhere((movie) => movie.id == movieId);
 
     return Card(
       margin: const EdgeInsets.all(8),
@@ -26,7 +24,7 @@ class MovieCard extends ConsumerWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (ctx) => MovieDetailsScreen(
+              builder: (_) => MovieDetailsScreen(
                 movieId: movieId,
               ),
             ),

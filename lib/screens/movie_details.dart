@@ -4,7 +4,10 @@ import 'package:kinopoisk/providers/movie_provider.dart';
 import 'package:kinopoisk/widgets/movie_edit.dart';
 
 class MovieDetailsScreen extends ConsumerStatefulWidget {
-  const MovieDetailsScreen({super.key, required this.movieId});
+  const MovieDetailsScreen({
+    super.key,
+    required this.movieId,
+  });
 
   final int movieId;
 
@@ -18,7 +21,7 @@ class _MovieDetailsScreenState extends ConsumerState<MovieDetailsScreen> {
       useSafeArea: true,
       isScrollControlled: true,
       context: context,
-      builder: (ctx) => EditMovie(movieId: widget.movieId),
+      builder: (_) => EditMovie(movieId: widget.movieId),
     );
   }
 
@@ -26,8 +29,7 @@ class _MovieDetailsScreenState extends ConsumerState<MovieDetailsScreen> {
   Widget build(BuildContext context) {
     final movie = ref
         .watch(moviesProvider)
-        .where((movie) => movie.id == widget.movieId)
-        .toList()[0];
+        .firstWhere((movie) => movie.id == widget.movieId);
 
     return Scaffold(
       appBar: AppBar(

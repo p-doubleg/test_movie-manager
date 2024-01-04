@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kinopoisk/objectbox.dart';
+import 'package:kinopoisk/data/objectbox.dart';
 import 'package:kinopoisk/screens/movie.dart';
 
 late ObjectBox objectbox;
