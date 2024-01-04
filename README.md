@@ -1,5 +1,5 @@
 ## Movie manager
-App for managing movies(crud)
+App for managing movies, where you can add\edit\delete movies that contains information about title, release country and year. 
 
 ### Main screen
 <img src="https://github.com/p-doubleg/test_movie-manager/assets/115932496/d93cf358-fb13-4c8e-b925-13338cf6b3e2" width="400" />
